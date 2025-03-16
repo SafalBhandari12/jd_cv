@@ -169,6 +169,17 @@ def clean_text(text: str) -> str:
     text = re.sub(r' +', ' ', text).strip()
     return text
 
+def format_llm_response(text: str) -> str:
+    """
+    Format the response from the LLM by splitting sentences and adding line breaks.
+    This function assumes the text is a plain string and improves its readability.
+    """
+    # Replace multiple spaces and ensure each sentence starts on a new line
+    sentences = text.split('. ')
+    sentences = [s.strip() for s in sentences if s]
+    formatted = '.<br>'.join(sentences)
+    return formatted
+
 def get_embedding(text: str):
     """Generate an embedding for the given text."""
     return model.encode(text).tolist()
@@ -316,9 +327,11 @@ if app_mode == "Submit CV":
                             st.error(f"Extraction failed for {key}.")
                             extraction_failed = True
                             break
+                        # Clean, then format the response text for better readability.
                         cleaned_response = clean_text(response_text)
-                        embedding = get_embedding(cleaned_response)
-                        extracted_info[key] = {"text": cleaned_response, "embedding": embedding}
+                        formatted_response = format_llm_response(cleaned_response)
+                        embedding = get_embedding(formatted_response)
+                        extracted_info[key] = {"text": formatted_response, "embedding": embedding}
                     
                     if not extraction_failed:
                         cv_entry = {
@@ -376,8 +389,9 @@ elif app_mode == "Upload Job Description":
                             extraction_failed = True
                             break
                         cleaned_response = clean_text(response_text)
-                        embedding = get_embedding(cleaned_response)
-                        extracted_info[key] = {"text": cleaned_response, "embedding": embedding}
+                        formatted_response = format_llm_response(cleaned_response)
+                        embedding = get_embedding(formatted_response)
+                        extracted_info[key] = {"text": formatted_response, "embedding": embedding}
                     
                     if not extraction_failed:
                         job_entry = {
