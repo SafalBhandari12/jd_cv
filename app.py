@@ -28,206 +28,49 @@ HEADERS = {
 }
 
 # Set page configuration at the very beginning
-st.set_page_config(layout="wide", page_title="CV & Job Matching Platform", page_icon="🔍")
+st.set_page_config(layout="wide", page_title="CV & Job Matching Platform")
 
-# Custom CSS for an enhanced professional UI
+# Custom CSS for a modern, professional UI
 st.markdown(
     """
     <style>
-    /* Base styles */
     body {
-        background-color: #f8f9fa;
-        font-family: 'Segoe UI', Arial, sans-serif;
+        background-color: #f9f9f9;
     }
     .main {
-        padding: 2rem;
+        padding: 20px;
     }
-    
-    /* Header and title styles */
-    .title-container {
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-    .main-title {
-        color: #1e3a8a;
-        font-weight: 700;
-        font-size: 2.5rem;
-        margin-bottom: 0.5rem;
-    }
-    .subtitle {
-        color: #475569;
-        font-size: 1.1rem;
-        font-weight: 400;
-    }
-    
-    /* Notice banner */
-    .notice-banner {
-        background-color: #eff6ff;
-        border-left: 5px solid #3b82f6;
-        padding: 1rem 1.5rem;
-        margin-bottom: 2rem;
-        border-radius: 0 6px 6px 0;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-    }
-    .notice-banner h3 {
-        color: #1e40af;
-        margin: 0 0 0.5rem 0;
-        font-size: 1.1rem;
-    }
-    .notice-banner p {
-        color: #334155;
-        margin: 0;
-        font-size: 0.95rem;
-        line-height: 1.5;
-    }
-    
-    /* Section headers */
-    .section-header {
-        padding: 1rem 0;
-        text-align: center;
-        color: #334155;
-        font-weight: 600;
-        font-size: 1.75rem;
-        margin: 1rem 0 1.5rem 0;
-        position: relative;
-    }
-    .section-header:after {
-        content: '';
-        display: block;
-        width: 60px;
-        height: 3px;
-        background-color: #3b82f6;
-        margin: 0.75rem auto 0;
-    }
-    
-    /* Cards and content blocks */
     .card {
         background-color: #ffffff;
-        border-radius: 10px;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        border: 1px solid #e2e8f0;
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
     .card h4 {
-        color: #1e40af;
-        margin-bottom: 1rem;
-        padding-bottom: 0.75rem;
-        border-bottom: 1px solid #e2e8f0;
-        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 12px;
     }
     .card p {
-        color: #334155;
-        margin: 0.75rem 0;
-        line-height: 1.6;
+        color: #555555;
+        margin: 4px 0;
+        line-height: 1.5;
     }
-    .card strong {
-        color: #1e3a8a;
-        font-weight: 600;
-    }
-    
-    /* Form styling */
-    .stButton button {
-        background-color: #2563eb;
-        color: white;
-        font-weight: 500;
-        padding: 0.5rem 1.5rem;
-        border-radius: 6px;
-        border: none;
-        box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
-        transition: all 0.2s;
-    }
-    .stButton button:hover {
-        background-color: #1d4ed8;
-        box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3);
-    }
-    
-    /* File uploader styling */
-    .stFileUploader label {
-        font-weight: 500;
-        color: #334155;
-    }
-    .stFileUploader div[data-testid="stFileUploadDropzone"] {
-        border: 2px dashed #cbd5e1;
-        border-radius: 8px;
-        background-color: #f8fafc;
-    }
-    
-    /* Success and info messages */
-    .st-success {
-        background-color: #ecfdf5;
-        border-color: #10b981;
-        color: #065f46;
-        border-width: 1px;
-        border-left-width: 10px;
-        padding: 1rem;
-        border-radius: 6px;
-        font-weight: 500;
-    }
-    
-    /* Score indicators */
-    .score-indicator {
-        display: inline-block;
-        padding: 0.25rem 0.75rem;
-        border-radius: 9999px;
-        font-weight: 600;
-        font-size: 0.875rem;
-        background-color: #dbeafe;
-        color: #1e40af;
-    }
-    .high-score {
-        background-color: #dcfce7;
-        color: #166534;
-    }
-    .medium-score {
-        background-color: #fff7ed;
-        color: #9a3412;
-    }
-    .low-score {
-        background-color: #fee2e2;
-        color: #991b1b;
-    }
-    
-    /* Progress and spinner elements */
-    .stSpinner {
+    .title {
+        color: #2c3e50;
+        font-weight: bold;
         text-align: center;
-        color: #3b82f6;
+        margin-bottom: 20px;
     }
-    
-    /* Footer */
-    footer {
+    .section-header {
+        margin-top: 40px;
+        margin-bottom: 20px;
         text-align: center;
-        padding: 2rem 0 1rem;
-        color: #64748b;
-        font-size: 0.85rem;
-    }
-    footer a {
-        color: #2563eb;
-        text-decoration: none;
-    }
-    footer a:hover {
-        text-decoration: underline;
+        color: #34495e;
     }
     </style>
     """,
-    unsafe_allow_html=True
-)
-
-# Display main title and notice banner
-st.markdown('<div class="title-container"><h1 class="main-title">Professional CV & Job Matching Platform</h1><p class="subtitle">AI-powered candidate-job matching for recruiters</p></div>', unsafe_allow_html=True)
-
-st.markdown(
-    """
-    <div class="notice-banner">
-        <h3>⚠️ Demo Mode Active</h3>
-        <p>Due to the model size being too big, we couldn't fully deploy our website. This version uses a lighter model for demonstration purposes. You can see the entire working code in our GitHub repository. Due to resource constraints, we couldn't deploy the complete solution directly.</p>
-    </div>
-    """, 
     unsafe_allow_html=True
 )
 
@@ -335,15 +178,6 @@ def perform_job_matching(job_entry: dict) -> list:
         ranking.append({"cv_id": cv_id, "score": score})
     return sorted(ranking, key=lambda x: x["score"], reverse=True)
 
-def get_score_class(score):
-    """Return CSS class based on score value"""
-    if score >= 0.8:
-        return "high-score"
-    elif score >= 0.6:
-        return "medium-score"
-    else:
-        return "low-score"
-
 cv_extraction_questions = {
     "skills": "What are the skills from this CV?",
     "education": "What are the educations from this CV?",
@@ -399,236 +233,141 @@ def extract_text_from_file(uploaded_file):
 # -----------------------------
 # User Interface
 # -----------------------------
-# Create a sidebar with better styling
-st.sidebar.markdown('<h2 style="color:#1e3a8a;margin-bottom:20px;">Navigation</h2>', unsafe_allow_html=True)
+st.markdown("<h1 class='title'>Professional CV & Job Matching Platform</h1>", unsafe_allow_html=True)
+st.sidebar.title("Navigation")
 app_mode = st.sidebar.selectbox("Choose Mode", ["Submit CV", "Upload Job Description"])
-
-# Add stats in sidebar
-# Add stats in sidebar
-st.sidebar.markdown("### Platform Statistics")
-st.sidebar.markdown(f"CVs in database: **{len(cv_dict)}**")
-st.sidebar.markdown(f"Jobs in database: **{len(job_dict)}**")
-
-# Add info about GitHub
-st.sidebar.markdown("---")
-st.sidebar.markdown("### About")
-st.sidebar.markdown("This platform uses AI to match CVs with job descriptions using semantic understanding and vector embeddings.")
-st.sidebar.markdown("[View on GitHub](https://github.com/your-username/cv-job-matching)")
 
 if app_mode == "Submit CV":
     st.markdown("<h2 class='section-header'>Submit Your CV</h2>", unsafe_allow_html=True)
-    
-    with st.container():
-        st.markdown("""
-        <div class="card">
-            <h4>📄 Upload Your Resume</h4>
-            <p>Our AI will analyze your CV to extract key skills, education, and experience that will help match you with suitable job opportunities.</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
     with st.form(f"cv_form_{st.session_state.cv_form_key}"):
-        col1, col2 = st.columns([1, 2])
+        col1, col2 = st.columns(2)
         with col1:
-            phone = st.text_input("Phone Number", key="cv_phone_input", placeholder="+1 (555) 123-4567")
+            phone = st.text_input("Phone Number", key="cv_phone_input")
         with col2:
             cv_file = st.file_uploader("Upload your CV (PDF, DOCX, or TXT)", type=["pdf", "docx", "txt"], key="cv_file_input")
-        
-        col3, col4 = st.columns([3, 1])
-        with col4:
-            submitted = st.form_submit_button("Submit CV")
+        submitted = st.form_submit_button("Submit CV")
         
         if submitted:
             if phone and cv_file:
-                with st.spinner("Processing your CV... Please wait"):
-                    extracted_text = extract_text_from_file(cv_file)
-                    if not extracted_text:
-                        st.error("Failed to extract text from the uploaded file.")
-                    else:
-                        cv_id = str(uuid.uuid4())
-                        cleaned_text = clean_text(extracted_text)
-                        extracted_info = {}
-                        extraction_failed = False
-                        
-                        progress_bar = st.progress(0)
-                        status_text = st.empty()
-                        
-                        for i, (key, question) in enumerate(cv_extraction_questions.items()):
-                            status_text.text(f"Extracting {key} from CV...")
-                            progress_bar.progress((i / len(cv_extraction_questions)) * 0.9)
+                extracted_text = extract_text_from_file(cv_file)
+                if not extracted_text:
+                    st.error("Failed to extract text from the uploaded file.")
+                else:
+                    cv_id = str(uuid.uuid4())
+                    cleaned_text = clean_text(extracted_text)
+                    extracted_info = {}
+                    extraction_failed = False
+                    
+                    for key, question in cv_extraction_questions.items():
+                        with st.spinner(f"Extracting {key} from CV..."):
                             response_text = query_extraction(question, cleaned_text)
-                            if response_text is None:
-                                st.error(f"Extraction failed for {key}.")
-                                extraction_failed = True
-                                break
-                            cleaned_response = clean_text(response_text)
-                            embedding = get_embedding(cleaned_response)
-                            extracted_info[key] = {"text": cleaned_response, "embedding": embedding}
+                        if response_text is None:
+                            st.error(f"Extraction failed for {key}.")
+                            extraction_failed = True
+                            break
+                        cleaned_response = clean_text(response_text)
+                        embedding = get_embedding(cleaned_response)
+                        extracted_info[key] = {"text": cleaned_response, "embedding": embedding}
+                    
+                    if not extraction_failed:
+                        cv_entry = {
+                            "id": cv_id,
+                            "cv_text": cleaned_text,
+                            "skills": extracted_info["skills"],
+                            "education": extracted_info["education"],
+                            "requirement": extracted_info["requirement"],
+                            "experience": extracted_info["experience"]
+                        }
+                        cv_dict[cv_id] = cv_entry
+                        st.session_state.phone_cv_map.setdefault(phone, []).append(cv_id)
                         
-                        if not extraction_failed:
-                            progress_bar.progress(1.0)
-                            status_text.text("CV analysis complete!")
-                            
-                            cv_entry = {
-                                "id": cv_id,
-                                "cv_text": cleaned_text,
-                                "skills": extracted_info["skills"],
-                                "education": extracted_info["education"],
-                                "requirement": extracted_info["requirement"],
-                                "experience": extracted_info["experience"]
-                            }
-                            cv_dict[cv_id] = cv_entry
-                            st.session_state.phone_cv_map.setdefault(phone, []).append(cv_id)
-                            
-                            st.success("CV submitted successfully!")
-                            st.markdown(
-                                f"""
-                                <div class="card">
-                                    <h4>CV Summary (ID: {cv_id})</h4>
-                                    <p><strong>Skills:</strong> {cv_entry['skills']['text']}</p>
-                                    <p><strong>Education:</strong> {cv_entry['education']['text']}</p>
-                                    <p><strong>Requirements:</strong> {cv_entry['requirement']['text']}</p>
-                                    <p><strong>Experience:</strong> {cv_entry['experience']['text']}</p>
-                                </div>
-                                """, unsafe_allow_html=True)
-                            
-                            # Check if there are any jobs to match with
-                            if job_dict:
-                                st.markdown("<h4 style='margin-top:2rem;'>Potential Job Matches</h4>", unsafe_allow_html=True)
-                                job_matches = []
-                                
-                                for job_id, job_entry in job_dict.items():
-                                    score = (
-                                        WEIGHT_SKILLS * cosine_similarity(job_entry["skills"]["embedding"], cv_entry["skills"]["embedding"]) +
-                                        WEIGHT_EDUCATION * cosine_similarity(job_entry["education"]["embedding"], cv_entry["education"]["embedding"]) +
-                                        WEIGHT_REQUIREMENT * cosine_similarity(job_entry["requirement"]["embedding"], cv_entry["requirement"]["embedding"]) +
-                                        WEIGHT_EXPERIENCE * cosine_similarity(job_entry["experience"]["embedding"], cv_entry["experience"]["embedding"])
-                                    )
-                                    job_matches.append({"job_id": job_id, "score": score})
-                                
-                                top_matches = sorted(job_matches, key=lambda x: x["score"], reverse=True)[:3]
-                                
-                                for match in top_matches:
-                                    job = job_dict[match["job_id"]]
-                                    score_class = get_score_class(match["score"])
-                                    st.markdown(
-                                        f"""
-                                        <div class="card">
-                                            <h4>Job ID: {match["job_id"]}</h4>
-                                            <p><span class="score-indicator {score_class}">Match Score: {match["score"]:.2f}</span></p>
-                                            <p><strong>Skills Required:</strong> {job['skills']['text']}</p>
-                                            <p><strong>Education Required:</strong> {job['education']['text']}</p>
-                                        </div>
-                                        """, unsafe_allow_html=True)
-                            
-                            st.session_state.cv_form_key += 1  # Reset form by incrementing key
+                        st.success("CV submitted successfully!")
+                        st.markdown(
+                            f"""
+                            <div class="card">
+                                <h4>CV ID: {cv_id}</h4>
+                                <p><strong>Skills:</strong> {cv_entry['skills']['text']}</p>
+                                <p><strong>Education:</strong> {cv_entry['education']['text']}</p>
+                                <p><strong>Requirements:</strong> {cv_entry['requirement']['text']}</p>
+                                <p><strong>Experience:</strong> {cv_entry['experience']['text']}</p>
+                            </div>
+                            """, unsafe_allow_html=True)
+                        st.session_state.cv_form_key += 1  # Reset form by incrementing key
             else:
                 st.warning("Please fill in all fields and upload a file before submitting.")
                 
 elif app_mode == "Upload Job Description":
     st.markdown("<h2 class='section-header'>Upload Job Description</h2>", unsafe_allow_html=True)
-    
-    with st.container():
-        st.markdown("""
-        <div class="card">
-            <h4>🔍 Find the Perfect Candidate</h4>
-            <p>Upload a job description to find the most suitable candidates from our database. Our AI will analyze the requirements and match them with candidate profiles.</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
     with st.form(f"job_form_{st.session_state.job_form_key}"):
-        col1, col2 = st.columns([1, 2])
+        col1, col2 = st.columns(2)
         with col1:
-            job_phone = st.text_input("Phone Number", key="job_phone_input", placeholder="+1 (555) 123-4567")
+            job_phone = st.text_input("Phone Number", key="job_phone_input")
         with col2:
             jd_file = st.file_uploader("Upload Job Description (PDF, DOCX, or TXT)", type=["pdf", "docx", "txt"], key="jd_file_input")
-        
-        col3, col4 = st.columns([3, 1])
-        with col4:
-            submitted_job = st.form_submit_button("Submit Job")
+        submitted_job = st.form_submit_button("Submit Job Description")
         
         if submitted_job:
             if job_phone and jd_file:
-                with st.spinner("Processing job description... Please wait"):
-                    extracted_text = extract_text_from_file(jd_file)
-                    if not extracted_text:
-                        st.error("Failed to extract text from the uploaded file.")
-                    else:
-                        job_id = str(uuid.uuid4())
-                        cleaned_text = clean_text(extracted_text)
-                        extracted_info = {}
-                        extraction_failed = False
-                        
-                        progress_bar = st.progress(0)
-                        status_text = st.empty()
-                        
-                        for i, (key, question) in enumerate(job_extraction_questions.items()):
-                            status_text.text(f"Extracting {key} from Job Description...")
-                            progress_bar.progress((i / len(job_extraction_questions)) * 0.9)
+                extracted_text = extract_text_from_file(jd_file)
+                if not extracted_text:
+                    st.error("Failed to extract text from the uploaded file.")
+                else:
+                    job_id = str(uuid.uuid4())
+                    cleaned_text = clean_text(extracted_text)
+                    extracted_info = {}
+                    extraction_failed = False
+                    
+                    for key, question in job_extraction_questions.items():
+                        with st.spinner(f"Extracting {key} from Job Description..."):
                             response_text = query_extraction_jd(question, cleaned_text)
-                            if response_text is None:
-                                st.error(f"Extraction failed for {key}.")
-                                extraction_failed = True
-                                break
-                            cleaned_response = clean_text(response_text)
-                            embedding = get_embedding(cleaned_response)
-                            extracted_info[key] = {"text": cleaned_response, "embedding": embedding}
+                        if response_text is None:
+                            st.error(f"Extraction failed for {key}.")
+                            extraction_failed = True
+                            break
+                        cleaned_response = clean_text(response_text)
+                        embedding = get_embedding(cleaned_response)
+                        extracted_info[key] = {"text": cleaned_response, "embedding": embedding}
+                    
+                    if not extraction_failed:
+                        job_entry = {
+                            "id": job_id,
+                            "jd_text": cleaned_text,
+                            "skills": extracted_info["skills"],
+                            "education": extracted_info["education"],
+                            "requirement": extracted_info["requirement"],
+                            "experience": extracted_info["experience"],
+                            "ranking": []
+                        }
+                        job_dict[job_id] = job_entry
+                        st.session_state.phone_job_map.setdefault(job_phone, []).append(job_id)
                         
-                        if not extraction_failed:
-                            progress_bar.progress(1.0)
-                            status_text.text("Job analysis complete!")
-                            
-                            job_entry = {
-                                "id": job_id,
-                                "jd_text": cleaned_text,
-                                "skills": extracted_info["skills"],
-                                "education": extracted_info["education"],
-                                "requirement": extracted_info["requirement"],
-                                "experience": extracted_info["experience"],
-                                "ranking": []
-                            }
-                            job_dict[job_id] = job_entry
-                            st.session_state.phone_job_map.setdefault(job_phone, []).append(job_id)
-                            
-                            ranking = perform_job_matching(job_entry)
-                            job_entry["ranking"] = ranking
-                            
-                            st.success("Job Description submitted successfully!")
-                            st.markdown(
-                                f"""
-                                <div class="card">
-                                    <h4>Job Summary (ID: {job_id})</h4>
-                                    <p><strong>Skills Required:</strong> {job_entry['skills']['text']}</p>
-                                    <p><strong>Education Required:</strong> {job_entry['education']['text']}</p>
-                                    <p><strong>Requirements:</strong> {job_entry['requirement']['text']}</p>
-                                    <p><strong>Experience Required:</strong> {job_entry['experience']['text']}</p>
-                                </div>
-                                """, unsafe_allow_html=True)
-                            
-                            st.markdown("<h3 class='section-header'>Candidate Ranking</h3>", unsafe_allow_html=True)
-                            if ranking:
-                                for index, candidate in enumerate(ranking):
-                                    cv_data = cv_dict[candidate['cv_id']]
-                                    score_class = get_score_class(candidate['score'])
-                                    
-                                    st.markdown(
-                                        f"""
-                                        <div class="card">
-                                            <h4>Candidate #{index + 1} (CV ID: {candidate['cv_id']})</h4>
-                                            <p><span class="score-indicator {score_class}">Match Score: {candidate['score']:.2f}</span></p>
-                                            <p><strong>Skills:</strong> {cv_data['skills']['text']}</p>
-                                            <p><strong>Education:</strong> {cv_data['education']['text']}</p>
-                                            <p><strong>Experience:</strong> {cv_data['experience']['text']}</p>
-                                        </div>
-                                        """, unsafe_allow_html=True)
-                            else:
-                                st.info("No matching CVs found in the database. Please encourage candidates to submit their CVs.")
-                            st.session_state.job_form_key += 1  # Reset form by incrementing key
+                        ranking = perform_job_matching(job_entry)
+                        job_entry["ranking"] = ranking
+                        
+                        st.success("Job Description submitted successfully!")
+                        st.markdown(
+                            f"""
+                            <div class="card">
+                                <h4>Job ID: {job_id}</h4>
+                                <p><strong>Skills:</strong> {job_entry['skills']['text']}</p>
+                                <p><strong>Education:</strong> {job_entry['education']['text']}</p>
+                                <p><strong>Requirements:</strong> {job_entry['requirement']['text']}</p>
+                                <p><strong>Experience:</strong> {job_entry['experience']['text']}</p>
+                            </div>
+                            """, unsafe_allow_html=True)
+                        
+                        st.subheader("Candidate Ranking")
+                        if ranking:
+                            for candidate in ranking:
+                                st.markdown(
+                                    f"""
+                                    <div class="card">
+                                        <p><strong>CV ID:</strong> {candidate['cv_id']}</p>
+                                        <p><strong>Matching Score:</strong> {candidate['score']:.3f}</p>
+                                    </div>
+                                    """, unsafe_allow_html=True)
+                        else:
+                            st.info("No matching CVs found.")
+                        st.session_state.job_form_key += 1  # Reset form by incrementing key
             else:
                 st.warning("Please fill in all fields and upload a file before submitting.")
-
-# Add footer
-st.markdown("""
-<footer>
-    <p>© 2025 CV & Job Matching Platform | <a href="https://github.com/your-username/cv-job-matching" target="_blank">View on GitHub</a></p>
-</footer>
-""", unsafe_allow_html=True)
