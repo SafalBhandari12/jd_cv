@@ -28,51 +28,102 @@ HEADERS = {
 }
 
 # Set page configuration at the very beginning
-st.set_page_config(layout="wide", page_title="CV & Job Matching Platform")
+st.set_page_config(layout="wide", page_title="CV & Job Matching Platform", initial_sidebar_state="expanded")
 
 # Custom CSS for a modern, professional UI
 st.markdown(
     """
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+    
     body {
         background-color: #f9f9f9;
+        font-family: 'Roboto', sans-serif;
     }
+    
     .main {
         padding: 20px;
     }
+    
     .card {
         background-color: #ffffff;
         border: 1px solid #e0e0e0;
-        border-radius: 8px;
+        border-radius: 10px;
         padding: 20px;
         margin-bottom: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
     }
+    
+    .card:hover {
+        transform: scale(1.01);
+    }
+    
     .card h4 {
         color: #2c3e50;
         margin-bottom: 12px;
     }
+    
     .card p {
         color: #555555;
         margin: 4px 0;
         line-height: 1.5;
     }
+    
     .title {
         color: #2c3e50;
-        font-weight: bold;
+        font-weight: 700;
         text-align: center;
         margin-bottom: 20px;
+        font-size: 2.5em;
     }
+    
     .section-header {
         margin-top: 40px;
         margin-bottom: 20px;
         text-align: center;
         color: #34495e;
+        font-size: 2em;
+        font-weight: 500;
     }
+    
+    .notice-banner {
+        background: #fff3cd;
+        border: 1px solid #ffeeba;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #856404;
+        font-weight: 500;
+        font-size: 1.1em;
+    }
+    
+    .sidebar-notice {
+        background: #d1ecf1;
+        border: 1px solid #bee5eb;
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #0c5460;
+        font-weight: 500;
+    }
+    
     </style>
     """,
     unsafe_allow_html=True
 )
+
+# Notice Message - explaining the lightweight deployment version
+notice_text = (
+    "We couldn't deploy our complete app because our model was too big and no service provider could do that. "
+    "So we created a light weight version where you can find the ranking by uploading Job Descriptions and CVs."
+)
+
+# Display notice in the main app area and in the sidebar
+st.markdown(f"<div class='notice-banner'>{notice_text}</div>", unsafe_allow_html=True)
+st.sidebar.markdown(f"<div class='sidebar-notice'>{notice_text}</div>", unsafe_allow_html=True)
 
 # Cache and load the embedding model so it only loads once
 @st.cache_resource
