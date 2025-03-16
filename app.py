@@ -1,15 +1,31 @@
 import os
-from dotenv import load_dotenv
-load_dotenv()  # Load environment variables from .env
-
 import uuid
 import numpy as np
 import re
 import streamlit as st
-from sentence_transformers import SentenceTransformer  # Import before requests
 import requests
 import PyPDF2
 import docx
+from sentence_transformers import SentenceTransformer
+
+# For local development, load .env only if not in production.
+if os.getenv("STREAMLIT_ENV") != "production":
+    from dotenv import load_dotenv
+    load_dotenv()  # Load environment variables from .env for local development
+
+# Retrieve the API key from st.secrets (set via your deployment dashboard)
+# or from the environment variables.
+API_KEY = st.secrets.get("MISTRAL_API_KEY", os.environ.get("MISTRAL_API_KEY"))
+if not API_KEY:
+    st.error("MISTRAL_API_KEY not set in environment variables!")
+    st.stop()
+
+# Mistral API configuration
+MISTRAL_URL = "https://api.mistral.ai/v1/chat/completions"
+HEADERS = {
+    "Authorization": f"Bearer {API_KEY}",
+    "Content-Type": "application/json"
+}
 
 # Set page configuration at the very beginning
 st.set_page_config(layout="wide", page_title="CV & Job Matching Platform")
@@ -57,19 +73,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-# Retrieve API key from environment variables
-API_KEY = os.environ.get("MISTRAL_API_KEY")
-if not API_KEY:
-    st.error("MISTRAL_API_KEY not set in environment variables!")
-    st.stop()
-
-# Mistral API configuration
-MISTRAL_URL = "https://api.mistral.ai/v1/chat/completions"
-HEADERS = {
-    "Authorization": f"Bearer {API_KEY}",
-    "Content-Type": "application/json"
-}
 
 # Cache and load the embedding model so it only loads once
 @st.cache_resource
